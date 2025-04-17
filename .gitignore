@@ -1,0 +1,8 @@
+# Bỏ qua thư mục build (nếu có)
+out/
+
+# Bỏ qua folder cấu hình của IntelliJ IDEA
+.idea/
+
+# Bỏ qua các file cấu hình của IntelliJ (module files)
+*.iml
