@@ -72,12 +72,23 @@ Khi một tab load video, tab khác vẫn lướt web bình thường vì các t
 ### Multithreading:
 - Nhiều tác vụ được lên lịch xen kẽ nhau
 - Có thể chạy trên 1 hoặc nhiều lõi CPU
-- **Ví dụ:** Java Thread
+- **Ví dụ:**
+    - Bạn cần gửi 10.000 email cho khách hàng.
+
+    - Nếu gửi tuần tự từng email → rất chậm.
+
+    - Nên bạn dùng Multithreading để gửi nhiều email cùng lúc.
+
+
 
 ### Parallelism:
 - Nhiều tác vụ chạy đồng thời thực sự
 - Yêu cầu nhiều lõi CPU
-- **Ví dụ:** ForkJoinPool, parallel stream
+- **Ví dụ:** 
+    - Khi đang gửi email A mà gặp mạng chậm, CPU không ngồi chờ, mà chuyển ngay sang gửi email B.
+    - Khi B cũng chậm, chuyển sang C...
+    - Liên tục chuyển đổi, xử lý nhiều công việc xen kẽ, tận dụng tối đa CPU.
+    - Concurrency = Một CPU luân phiên xử lý nhiều task "gần như cùng lúc".
 
 ---
 
@@ -87,10 +98,10 @@ Khi một tab load video, tab khác vẫn lướt web bình thường vì các t
 - `Atomic`: hỗ trợ các thao tác an toàn khi nhiều thread truy cập
 
 **Ví dụ:**
-- `synchronized`: chuyển tiền ngân hàng
-- `volatile`: cờ `isRunning` để dừng thread
-- `AtomicInteger`: đếm lượt truy cập website
-
+-  Gửi nhiều email bằng multithreading  
+- Đếm số email gửi thành công (sử dụng AtomicInteger)
+- Có thể dừng dịch vụ giữa chừng (volatile)
+- Bảo vệ các thao tác nhạy cảm (synchronized)
 ---
 
 ## 8. Issues trong Multithreading & cách phòng tránh
@@ -107,3 +118,7 @@ Khi một tab load video, tab khác vẫn lướt web bình thường vì các t
 - Deadlock: A giữ khóa X, B giữ Y → đợi nhau mãi
 - Starvation: thread ưu tiên thấp bị bỏ qua
 - Livelock: 2 thread liên tục nhường nhau
+
+### 9.Context Switching
+- Context switching (chuyển ngữ cảnh) là quá trình CPU lưu lại trạng thái (context) của một thread đang chạy và nạp trạng thái của một thread khác để tiếp tục thực thi.
+- Context switching = Tạm ngừng thread A → Ghi nhớ mọi thứ → Chạy thread B → Lúc cần quay lại A thì khôi phục.
