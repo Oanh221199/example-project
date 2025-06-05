@@ -6,3 +6,6 @@
 
 # Bỏ qua tất cả các file .iml (cả trong các thư mục con)
 **/*.iml
+
+# Bỏ qua tất cả các thư mục target
+**/target/
